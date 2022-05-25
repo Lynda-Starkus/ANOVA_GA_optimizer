@@ -1,0 +1,24 @@
+language: python
+
+python:
+- "3.6"
+
+# services:
+# - docker
+matrix:
+  include:
+    - name: "Python 3.6 on Xenial Linux"
+      python: 3.6           # this works for Linux but is ignored on macOS or Windows
+    - name: "Python 3.6 on macOS"
+      os: osx
+      osx_image: xcode10.2  # Python 3.7.2 running on macOS 10.14.3
+      language: shell       # 'language: python' is an error on Travis CI macOS
+
+install:
+- pip3 install --upgrade pip
+- pip3 install pytest
+- python3 setup.py install
+
+script:
+- pytest
+
